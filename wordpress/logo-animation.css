@@ -1,0 +1,32 @@
+.mt-logo-animated {
+  display: block;
+  width: 100%;
+  max-width: 160px;
+  line-height: 0;
+}
+
+.mt-logo-animated svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.mt-logo-animated .mt-logo__stroke {
+  stroke: #ffffff;
+  stroke-width: 12;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.mt-logo-animated .mt-logo__letter-mask {
+  fill: var(--mt-header-bg, #0a0a0f);
+}
+
+.mt-logo-animated .mt-logo__letter {
+  fill: #ffffff;
+}
+
+.mt-logo-animated #mt-animated-letters {
+  pointer-events: none;
+}

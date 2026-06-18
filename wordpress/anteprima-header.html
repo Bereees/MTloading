@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anteprima header — Memorie Tangibili</title>
+  <link rel="stylesheet" href="logo-animation.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: #0a0a0f;
+      color: #fff;
+      font-family: Roboto, sans-serif;
+    }
+
+    .header-preview {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Stessa animazione Elementor già presente sul sito */
+    .header-preview {
+      animation: entraInsieme 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+
+    @keyframes entraInsieme {
+      0% {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .site-title {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.2;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    nav {
+      justify-self: end;
+      display: flex;
+      gap: 1.5rem;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <header class="header-preview">
+    <div class="mt-logo-animated" data-mt-logo-animation aria-label="Logo Memorie Tangibili">
+      <svg viewBox="0 0 1480 825" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g id="logo">
+          <path id="tracciato" class="mt-logo__stroke" d="M977 554L740.5 648.5L504 554V176L740.5 270.5L977 176V554Z"/>
+          <path id="linea" class="mt-logo__stroke" d="M740 294.5V625"/>
+          <g id="m">
+            <g transform="translate(-503.5 -176.5)">
+              <rect class="mt-logo__letter-mask" x="440" y="106" width="127" height="141" rx="10"/>
+              <path class="mt-logo__letter" d="M471.811 192.33L470.25 150.245L497.552 223.739H508.81L536.176 150.203L534.614 192.33V223.739H550.488V129.251H529.807L503.244 202.129L476.618 129.251H456V223.739H471.811V192.33Z"/>
+            </g>
+          </g>
+          <g id="t">
+            <g transform="translate(-977 -554.5)">
+              <rect class="mt-logo__letter-mask" x="923" y="484" width="108" height="141" rx="10"/>
+              <path class="mt-logo__letter" fill-rule="evenodd" clip-rule="evenodd" d="M968.479 520.073H939.081V507.094H1014.3V520.073H984.638V601.582H968.479V520.073Z"/>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <h1 class="site-title">MEMORIE<br>TANGIBILI</h1>
+
+    <nav aria-label="Menu">
+      <span>DIARI INEDITI</span>
+      <span>SCACCHI</span>
+      <span>ARTICOLI</span>
+      <span>POESIE</span>
+      <span>NECROPOLI</span>
+    </nav>
+  </header>
+
+  <script src="logo-animation.js"></script>
+</body>
+</html>

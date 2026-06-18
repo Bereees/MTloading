@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Logo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0a0f;
+    }
+
+    .logo {
+      width: min(90vw, 740px);
+      height: auto;
+    }
+
+    .logo svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo" aria-label="Logo">
+    <svg width="1480" height="825" viewBox="0 0 1480 825" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="logo">
+        <rect width="1480" height="825" fill="white"/>
+        <path id="tracciato" d="M977 554L740.5 648.5L504 554V176L740.5 270.5L977 176V554Z" stroke="black" stroke-width="12" stroke-linejoin="round"/>
+        <path id="linea" d="M740 294.5V625" stroke="black" stroke-width="12"/>
+        <g id="m">
+          <g transform="translate(-503.5 -176.5)">
+            <rect x="440" y="106" width="127" height="141" rx="10" fill="white"/>
+            <path d="M471.811 192.33L470.25 150.245L497.552 223.739H508.81L536.176 150.203L534.614 192.33V223.739H550.488V129.251H529.807L503.244 202.129L476.618 129.251H456V223.739H471.811V192.33Z" fill="black"/>
+          </g>
+        </g>
+        <g id="t">
+          <g transform="translate(-977 -554.5)">
+            <rect x="923" y="484" width="108" height="141" rx="10" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M968.479 520.073H939.081V507.094H1014.3V520.073H984.638V601.582H968.479V520.073Z" fill="black"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <script type="module">
+    const path = document.getElementById('tracciato');
+    const pathLength = path.getTotalLength();
+
+    const INITIAL_DELAY_MS = 700;
+    const INTRO_LAP_MS = 1500;
+
+    const letters = {
+      m: document.getElementById('m'),
+      t: document.getElementById('t'),
+    };
+
+    function pathOffsetAt(x, y) {
+      let best = 0;
+      let bestDist = Infinity;
+
+      for (let i = 0; i <= 500; i++) {
+        const t = (i / 500) * pathLength;
+        const p = path.getPointAtLength(t);
+        const dist = (p.x - x) ** 2 + (p.y - y) ** 2;
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = t / pathLength;
+        }
+      }
+
+      return best;
+    }
+
+    function normalizeOffset(offset) {
+      return ((offset % 1) + 1) % 1;
+    }
+
+    function placeOnPath(letter, offset) {
+      const point = path.getPointAtLength(normalizeOffset(offset) * pathLength);
+      letters[letter].setAttribute('transform', `translate(${point.x} ${point.y})`);
+    }
+
+    function easeInOut(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+    }
+
+    function interpolateFullLap(startOffset, forward, progress) {
+      return normalizeOffset(startOffset + (forward ? progress : -progress));
+    }
+
+    function animateFullLap(letter, startOffset, forward, duration) {
+      return new Promise((resolve) => {
+        const startTime = performance.now();
+
+        function frame(now) {
+          const t = Math.min((now - startTime) / duration, 1);
+          const offset = interpolateFullLap(startOffset, forward, easeInOut(t));
+          placeOnPath(letter, offset);
+
+          if (t < 1) {
+            requestAnimationFrame(frame);
+          } else {
+            placeOnPath(letter, startOffset);
+            resolve();
+          }
+        }
+
+        requestAnimationFrame(frame);
+      });
+    }
+
+    function wait(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    const mStart = pathOffsetAt(503.5, 176.5);
+    const tStart = pathOffsetAt(977, 554.5);
+
+    async function start() {
+      await wait(INITIAL_DELAY_MS);
+      await Promise.all([
+        animateFullLap('m', mStart, true, INTRO_LAP_MS),
+        animateFullLap('t', tStart, true, INTRO_LAP_MS),
+      ]);
+    }
+
+    placeOnPath('m', mStart);
+    placeOnPath('t', tStart);
+    start();
+  </script>
+</body>
+</html>

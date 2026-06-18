@@ -1,0 +1,19 @@
+<svg width="1480" height="825" viewBox="0 0 1480 825" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="logo">
+<rect width="1480" height="825" fill="white"/>
+<path id="tracciato" d="M977 554L740.5 648.5L504 554V176L740.5 270.5L977 176V554Z" stroke="black" stroke-width="12" stroke-linejoin="round"/>
+<path id="linea" d="M740 294.5V625" stroke="black" stroke-width="12"/>
+<g id="m">
+<g transform="translate(-503.5 -176.5)">
+<rect x="440" y="106" width="127" height="141" rx="10" fill="white"/>
+<path d="M471.811 192.33L470.25 150.245L497.552 223.739H508.81L536.176 150.203L534.614 192.33V223.739H550.488V129.251H529.807L503.244 202.129L476.618 129.251H456V223.739H471.811V192.33Z" fill="black"/>
+</g>
+</g>
+<g id="t">
+<g transform="translate(-977 -554.5)">
+<rect x="923" y="484" width="108" height="141" rx="10" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M968.479 520.073H939.081V507.094H1014.3V520.073H984.638V601.582H968.479V520.073Z" fill="black"/>
+</g>
+</g>
+</g>
+</svg>
